@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/ilyamakarevich/weatherApalonProject/MyWeatherApp/ApiManager.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/ilyamakarevich/weatherApalonProject/MyWeatherApp/ApiManager.m">
+   </FileRef>
+   <FileRef
       location = "group:MyWeatherApp.xcodeproj">
    </FileRef>
    <FileRef

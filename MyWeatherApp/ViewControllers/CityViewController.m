@@ -13,14 +13,21 @@
 #import "AFNetworking.h"
 #import "Weather.h"
 #import "WeekForecast.h"
+#import "ApiManager.h"
 
-@interface CityViewController ()
+@interface CityViewController () {
+    ApiManager* apiManager;
+}
 @end
 
 @implementation CityViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+     apiManager = [ApiManager sharedManager];
+    
     self.activityIndicator.hidden = false;
     self.weatherTableView.hidden = true;
     [_activityIndicator startAnimating];

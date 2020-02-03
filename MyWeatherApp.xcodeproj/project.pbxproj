@@ -18,8 +18,8 @@
 		A434B6C423D388AF00085889 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A434B6C323D388AF00085889 /* MainViewController.m */; };
 		A45D4CC523D4717B0078C42A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45D4CC423D4717B0078C42A /* SearchViewController.m */; };
 		A45D4CC823D4718A0078C42A /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45D4CC723D4718A0078C42A /* CityViewController.m */; };
-		A45D4CCA23D47F020078C42A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A45D4CC923D47F020078C42A /* APIManager.m */; };
 		A45D4CD223D4EE960078C42A /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = A45D4CD123D4EE960078C42A /* City.m */; };
+		A49F68BC23E8AA1700FAD8BA /* ApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A49F68BA23E8AA1600FAD8BA /* ApiManager.m */; };
 		A4D4673823E1C09F00B4F5AD /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D4673723E1C09F00B4F5AD /* Weather.m */; };
 		A4D4673B23E1D99D00B4F5AD /* TodayViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D4673A23E1D99D00B4F5AD /* TodayViewCell.m */; };
 		A4D4673E23E2CB2300B4F5AD /* WeekForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D4673D23E2CB2300B4F5AD /* WeekForecast.m */; };
@@ -62,10 +62,11 @@
 		A45D4CC423D4717B0078C42A /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		A45D4CC623D4718A0078C42A /* CityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityViewController.h; sourceTree = "<group>"; };
 		A45D4CC723D4718A0078C42A /* CityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityViewController.m; sourceTree = "<group>"; };
-		A45D4CC923D47F020078C42A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		A45D4CD023D4EE960078C42A /* City.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
 		A45D4CD123D4EE960078C42A /* City.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
 		A492D0A423E4150200A7C5D4 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A49F68BA23E8AA1600FAD8BA /* ApiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ApiManager.m; path = /Users/ilyamakarevich/weatherApalonProject/MyWeatherApp/ApiManager.m; sourceTree = "<absolute>"; };
+		A49F68BB23E8AA1600FAD8BA /* ApiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApiManager.h; path = /Users/ilyamakarevich/weatherApalonProject/MyWeatherApp/ApiManager.h; sourceTree = "<absolute>"; };
 		A4D4673623E1C09F00B4F5AD /* Weather.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
 		A4D4673723E1C09F00B4F5AD /* Weather.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
 		A4D4673923E1D99D00B4F5AD /* TodayViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewCell.h; sourceTree = "<group>"; };
@@ -118,9 +119,10 @@
 				A4D4675223E2D69200B4F5AD /* Cell */,
 				A434B6A723D3864200085889 /* AppDelegate.m */,
 				A434B6A623D3864200085889 /* AppDelegate.h */,
-				A45D4CC923D47F020078C42A /* APIManager.m */,
 				A434B6A923D3864200085889 /* SceneDelegate.h */,
 				A434B6AA23D3864200085889 /* SceneDelegate.m */,
+				A49F68BB23E8AA1600FAD8BA /* ApiManager.h */,
+				A49F68BA23E8AA1600FAD8BA /* ApiManager.m */,
 				A434B6AF23D3864200085889 /* Main.storyboard */,
 				A434B6B523D3864500085889 /* Assets.xcassets */,
 				A434B6B723D3864500085889 /* LaunchScreen.storyboard */,
@@ -313,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A49F68BC23E8AA1700FAD8BA /* ApiManager.m in Sources */,
 				A434B6BC23D3864500085889 /* main.m in Sources */,
 				A4D4674123E2CE3F00B4F5AD /* CurrentForecast.m in Sources */,
 				A434B6B423D3864200085889 /* MyWeatherApp.xcdatamodeld in Sources */,
@@ -322,7 +325,6 @@
 				A4D4675023E2D68D00B4F5AD /* WeekViewCell.m in Sources */,
 				A4D4673823E1C09F00B4F5AD /* Weather.m in Sources */,
 				A4D4673B23E1D99D00B4F5AD /* TodayViewCell.m in Sources */,
-				A45D4CCA23D47F020078C42A /* APIManager.m in Sources */,
 				A434B6C423D388AF00085889 /* MainViewController.m in Sources */,
 				A45D4CC523D4717B0078C42A /* SearchViewController.m in Sources */,
 				A45D4CD223D4EE960078C42A /* City.m in Sources */,
