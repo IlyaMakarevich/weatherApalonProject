@@ -88,7 +88,7 @@
 
 -(void) searchCity {
     AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
-    [manager GET: @"https://api.opencagedata.com/geocode/v1/json"
+    [manager GET: CITY_URL
         parameters:@{@"q" : self.searchTextValue,
                    @"key" : CITY_API_KEY }
         progress:nil success:^(NSURLSessionDataTask * task, id responseObject) {
