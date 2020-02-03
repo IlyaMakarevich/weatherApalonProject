@@ -43,7 +43,7 @@
 }
 
 -(void) didChooseValue:(City*) city {
-    city.number = (int)[self.fetchedResultsController fetchedObjects].count;
+    city.number = (int)[self.fetchedResultsController fetchedObjects].count + 1;
     [self saveData:city];
     [self fetch];
     [self.table reloadData];
@@ -139,7 +139,7 @@
     [array insertObject:movingCity atIndex:toIndexPath.row];
     NSLog(@"%d", movingCity.number);
     
-    // Update the order of them all according to their index in the mutable array
+    // Update the order of numbers in database
      int i = 0;
      for (NSManagedObject *mo in array)
      {
@@ -153,6 +153,14 @@
         NSArray* array = [self.fetchedResultsController fetchedObjects];
         NSManagedObject* city = [array objectAtIndex:indexPath.row];
         [context deleteObject:city];
+
+        // Update the order of numbers in database
+        int i = 0;
+        for (NSManagedObject *mo in array)
+        {
+            [mo setValue:[NSNumber numberWithInt:i++] forKey:@"number"];
+        }
+
         [appDelegate saveContext];
         [self fetch];
         [self.table reloadData];
