@@ -7,6 +7,7 @@
 //
 
 #import "City.h"
+#import <CoreData/CoreData.h>
 
 
 
@@ -29,6 +30,14 @@
     }
     
     return self;
+}
+
+- (instancetype)initWithMO:(NSManagedObject*)mo {
+    return [self initWithCity:[mo valueForKey:@"city"]
+                      country:[mo valueForKey:@"country"]
+                          lat:[[mo valueForKey:@"lat"] doubleValue]
+                          lng:[[mo valueForKey:@"lng"] doubleValue]
+                       number:[[mo valueForKey:@"number"] intValue]];
 }
 
 -(instancetype)initWithDictionary:(NSDictionary *)dic {

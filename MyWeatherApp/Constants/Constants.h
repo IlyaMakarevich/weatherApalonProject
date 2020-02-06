@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#define CITY_URL @"https://api.opencagedata.com/geocode/v1/json"
-#define CITY_API_KEY @"df1cec4851fb4f5fbb632a272d56b5b3"
-
-#define WEATHER_URL @"https://api.darksky.net/forecast"
-#define WEATHER_API_KEY @"01c2b10d7bc3a9012d5bcbb055ade7c8"
+extern NSString * const CITY_URL;
+extern NSString * const CITY_API_KEY;
+extern NSString * const WEATHER_URL;
+extern NSString * const WEATHER_API_KEY;
 
 
 @interface Constants : NSObject

@@ -88,6 +88,11 @@
 
 -(void) searchCity {
     AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
+
+    __weak typeof(self) weakSelf = self;
+    //__typeof(self) __weak weakSelf = self;
+
+
     [manager GET: CITY_URL
         parameters:@{@"q" : self.searchTextValue,
                    @"key" : CITY_API_KEY }
@@ -104,11 +109,11 @@
                           lat:[[[dic valueForKey:@"geometry"] objectForKey:@"lat"] doubleValue]
                           lng:[[[dic valueForKey:@"geometry"] objectForKey:@"lng"] doubleValue]
                           number: 999];
-            if ([NSNumber numberWithDouble: city.lat] != NULL &&
-                [NSNumber numberWithDouble: city.lng]!= NULL &&
-                city.city != NULL && city.country != NULL ){
+            if ([NSNumber numberWithDouble: city.lat] != nil &&
+                [NSNumber numberWithDouble: city.lng]!= nil &&
+                city.city != NULL && city.country != nil ){
                 [tempCities addObject:city];
-                           [tempCities description];
+                [tempCities description];
             }
 
         }
@@ -118,7 +123,7 @@
         for (City* city in self.cities) {
             NSLog(@"%@", city);
         }
-        [self.tableView reloadData];
+        [weakSelf.tableView reloadData];
 
     } failure:^(NSURLSessionTask *operation, NSError *error) {
 
@@ -132,7 +137,7 @@
 
         [alertVC addAction:okAction];
 
-        [self presentViewController:alertVC animated:YES completion:nil];
+        [weakSelf presentViewController:alertVC animated:YES completion:nil];
     }];
 }
 

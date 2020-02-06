@@ -13,7 +13,7 @@
 #import "AFNetworking.h"
 #import "Weather.h"
 #import "WeekForecast.h"
-#import "ApiManager.h"
+
 
 @interface CityViewController () {
     ApiManager* apiManager;
@@ -28,9 +28,11 @@
     [super viewDidLoad];
      apiManager = [ApiManager sharedManager];
     
-    self.activityIndicator.hidden = false;
-    self.weatherTableView.hidden = true;
+    self.activityIndicator.hidden = NO;
+    self.weatherTableView.hidden = YES;
     [_activityIndicator startAnimating];
+    [self.weatherTableView registerNib:[UINib nibWithNibName:@"WeekViewCell" bundle:nil] forCellReuseIdentifier:@"weekCell"];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -48,20 +50,12 @@
 
     if (indexPath.row == 0 && indexPath.section == 0) {
         TodayViewCell *nowCell = [tableView dequeueReusableCellWithIdentifier:nowCellIdentifier];
-        if (nowCell == nil) {
-            nowCell = [[TodayViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nowCellIdentifier] ;
-        }
         [nowCell configureForTodayForecast:_weather.currentForecast location:_cityInfo];
         return nowCell;
     }
 
     else {
         WeekViewCell *dailyCell = [tableView dequeueReusableCellWithIdentifier:dailyCellIdentifier];
-        if (dailyCell == nil) {
-            [[NSBundle mainBundle] loadNibNamed:@"WeekViewCell" owner:self options:nil];
-            dailyCell = _weekCell;
-            _weekCell = nil;
-        }
         WeekForecast *weekForecast = [_weather.dailyForecasts objectAtIndex:indexPath.row];
         [dailyCell configureForWeekForecast:weekForecast];
         return dailyCell;
@@ -101,6 +95,8 @@
 
 
 -(void) searchWeather {
+    [apiManager getWeatherForCity:_cityInfo];
+    
     NSString *lat = [[NSString alloc] initWithFormat:@"%f", _cityInfo.lat];
     NSString *lng = [[NSString alloc] initWithFormat:@"%f", _cityInfo.lng];
 
@@ -114,13 +110,10 @@
         self.weather = [[Weather alloc] initWithWeatherDictionary:responseDict];
         NSLog(@"%@", [self.weather description]);
         NSLog(@"%@", [self.weather.dailyForecasts description]);
-        self.activityIndicator.hidden = true;
-        self.weatherTableView.hidden = false;
+        self.activityIndicator.hidden = YES;
+        self.weatherTableView.hidden = NO;
         [self.activityIndicator stopAnimating];
         [self.weatherTableView reloadData];
-
-
-
     } failure:^(NSURLSessionTask *operation, NSError *error) {
 
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Error Retrieving Cities"

@@ -24,21 +24,21 @@
 }
 
 -(void) configureForTodayForecast:(CurrentForecast*) currentForecast location: (City*) location {
-    if (currentForecast.temperature == NULL) {
-               self.locationLabel.text = location.city;
-               self.tempLabel.text = @"";
-               self.conditionsLabel.text = @"";
-           } else {
-               [UIView animateWithDuration:1.0
-                                animations:^{
-                   self.tempLabel.alpha = 0.0f;
-                   self.conditionsLabel.alpha = 0.0f;
-                   self.tempLabel.text = [NSString stringWithFormat:@"%@ ℃", currentForecast.temperatureCelsius];
-                   self.conditionsLabel.text = currentForecast.summary;
-                   self.tempLabel.alpha = 1.0f;
-                   self.conditionsLabel.alpha = 1.0f;
-               }];
-           }
+    if (currentForecast.temperature == nil) {
+        self.locationLabel.text = location.city;
+        self.tempLabel.text = @"";
+        self.conditionsLabel.text = @"";
+        self.tempLabel.alpha = 0.0f;
+        self.conditionsLabel.alpha = 0.0f;
+    } else {
+        [UIView animateWithDuration:1.0
+                         animations:^{
+            self.tempLabel.text = [NSString stringWithFormat:@"%@ ℃", currentForecast.temperatureCelsius];
+            self.conditionsLabel.text = currentForecast.summary;
+            self.tempLabel.alpha = 1.0f;
+            self.conditionsLabel.alpha = 1.0f;
+        }];
+    }
 }
 
 @end

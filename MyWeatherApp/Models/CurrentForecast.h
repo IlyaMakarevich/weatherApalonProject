@@ -11,22 +11,20 @@
 @interface CurrentForecast : NSObject
 
 
-@property(strong, nonatomic) NSString *feelsLikeTemp;
-@property(strong, nonatomic) NSString *pressure;
-@property(strong, nonatomic) NSString *precipIntensity;
-@property(strong, nonatomic) NSString *precipProbability;
-@property(strong, nonatomic) NSString *temperature;
-@property(strong, nonatomic) NSString *time;
-@property(strong, nonatomic) NSString *summary;
-@property(strong, nonatomic) NSString *temperatureCelsius;
-@property(strong, nonatomic) NSNumber *windBearing;
-@property(strong, nonatomic) NSString *windSpeed;
-@property(strong, nonatomic) NSString *localTime;
-@property(strong, nonatomic) NSString *visibility;
-@property(strong, nonatomic) NSString *dewPoint;
+@property(strong, nonatomic, readonly) NSString *feelsLikeTemp;
+@property(strong, nonatomic, readonly) NSString *pressure;
+@property(strong, nonatomic, readonly) NSString *precipIntensity;
+@property(strong, nonatomic, readonly) NSString *precipProbability;
+@property(strong, nonatomic, readonly) NSString *temperature;
+@property(strong, nonatomic, readonly) NSString *time;
+@property(strong, nonatomic, readonly) NSString *summary;
+@property(strong, nonatomic, readonly) NSString *temperatureCelsius;
+@property(strong, nonatomic, readonly) NSString *windSpeed;
+@property(strong, nonatomic, readonly) NSString *localTime;
+@property(strong, nonatomic, readonly) NSString *visibility;
+@property(strong, nonatomic, readonly) NSString *dewPoint;
 
 -(id)initWithCurrentlyDictionary:(NSDictionary *)dictionary;
--(NSNumber *)windBearingForCompassSectors:(id)windBearing;
 -(NSString *)fahrenheitToCelsius:(NSString *)temperature;
 -(NSString *)temperatureFormatter:(NSString *)temperature;
 

@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "City.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, retain) NSString *someProperty;
 
 +(id) sharedManager;
+-(void) getWeatherForCity:(City*)city;
 
 @end
 

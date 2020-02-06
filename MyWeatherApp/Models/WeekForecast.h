@@ -12,19 +12,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WeekForecast : NSObject
 
-@property(strong, nonatomic) NSString *temperatureMax;
-@property(strong, nonatomic) NSString *temperatureMin;
-@property(strong, nonatomic) NSString *humidity;
-@property(strong, nonatomic) NSString *dewPoint;
-@property(strong, nonatomic) NSString *visibility;
-@property(strong, nonatomic) NSString *pressure;
-@property(strong, nonatomic) NSString *windBearing;
-@property(strong, nonatomic) NSString *time;
-@property(strong, nonatomic) NSString *summary;
-@property(strong, nonatomic) NSString *temperatureCelsiusMax;
-@property(strong, nonatomic) NSString *temperatureCelsiusMin;
-@property(strong, nonatomic) NSString *sunrise;
-@property(strong, nonatomic) NSString *sunset;
+@property(strong, nonatomic, readonly) NSString *temperatureMax;
+@property(strong, nonatomic, readonly) NSString *temperatureMin;
+@property(strong, nonatomic, readonly) NSString *humidity;
+@property(strong, nonatomic, readonly) NSString *dewPoint;
+@property(strong, nonatomic, readonly) NSString *visibility;
+@property(strong, nonatomic, readonly) NSString *pressure;
+@property(strong, nonatomic, readonly) NSString *windBearing;
+@property(strong, nonatomic, readonly) NSString *time;
+@property(strong, nonatomic, readonly) NSString *summary;
+@property(strong, nonatomic, readonly) NSString *temperatureCelsiusMax;
+@property(strong, nonatomic, readonly) NSString *temperatureCelsiusMin;
+@property(strong, nonatomic, readonly) NSString *sunrise;
+@property(strong, nonatomic, readonly) NSString *sunset;
 
 -(id)initWithDailyDictionary:(NSDictionary *)dictionary;
 

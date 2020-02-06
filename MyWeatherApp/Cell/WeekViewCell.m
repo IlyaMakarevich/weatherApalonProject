@@ -23,17 +23,16 @@
 }
 
 -(void) configureForWeekForecast:(WeekForecast *)weekForecast {
-    [[self summary] setText:[weekForecast summary]];
-    [[self dayLabel] setText:[self unixTimeStampToDate:[weekForecast time]]];
-    [[self minTempLabel] setText:[[NSString alloc] initWithFormat:@"Min: %@˚C",weekForecast.temperatureCelsiusMin]];
-    [[self maxTempLabel] setText:[[NSString alloc] initWithFormat:@"Max: %@˚C",weekForecast.temperatureCelsiusMax]];
-    [[self humidityLabel] setText:[[NSString alloc] initWithFormat:@"Humidity: %@%%",weekForecast.humidity]];
-    [[self dewPointLabel] setText:[[NSString alloc] initWithFormat:@"Dew point: %@ F",weekForecast.dewPoint ]];
-    [[self visibilityLabel] setText:[[NSString alloc] initWithFormat:@"Visibility %@ km",weekForecast.visibility]];
-    [[self pressureLabel] setText:[[NSString alloc] initWithFormat:@"Pressure %@mb",weekForecast.pressure]];
-    [[self sunriseLabel] setText:[[NSString alloc] initWithFormat:@"Sunrise at %@",[self unixTimeStampToHHMMDate:weekForecast.sunrise]]];
-    [[self sunsetLabel] setText:[[NSString alloc] initWithFormat:@"Sunrise at %@",[self unixTimeStampToHHMMDate:weekForecast.sunset]]];
-
+    self.summary.text = [weekForecast summary];
+    self.dayLabel.text = [self unixTimeStampToDate:weekForecast.time];
+    self.minTempLabel.text =  [NSString stringWithFormat:@"Min: %@˚C",weekForecast.temperatureCelsiusMin];
+    self.maxTempLabel.text = [NSString stringWithFormat:@"Max: %@˚C",weekForecast.temperatureCelsiusMax];
+    self.humidityLabel.text = [NSString stringWithFormat:@"Humidity: %@%%",weekForecast.humidity];
+    self.dewPointLabel.text = [NSString stringWithFormat:@"Dew point: %@ F",weekForecast.dewPoint];
+    self.visibilityLabel.text = [NSString stringWithFormat:@"Visibility %@ km",weekForecast.visibility];
+    self.pressureLabel.text = [NSString stringWithFormat:@"Pressure %@mb",weekForecast.pressure];
+    self.sunriseLabel.text = [NSString stringWithFormat:@"Sunrise at %@",[self unixTimeStampToHHMMDate:weekForecast.sunrise]];
+    self.sunsetLabel.text = [NSString stringWithFormat:@"Sunset at %@",[self unixTimeStampToHHMMDate:weekForecast.sunset]];
 }
 
 -(NSString *)unixTimeStampToDate:(NSString *)timeStamp{

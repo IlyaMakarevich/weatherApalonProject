@@ -11,6 +11,7 @@
 #import "Weather.h"
 #import "TodayViewCell.h"
 #import "WeekViewCell.h"
+#import "ApiManager.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

@@ -22,8 +22,10 @@
 
 -(void) viewDidLoad {
     [super viewDidLoad];
+    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    context = appDelegate.persistentContainer.viewContext;
     self.fetchedCities = [NSMutableArray array];
-    _table.allowsMultipleSelectionDuringEditing = false;
+    _table.allowsMultipleSelectionDuringEditing = NO;
     [self fetch];
     
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(edit)];
@@ -57,7 +59,7 @@
     UINavigationController *objNav = [[UINavigationController alloc] initWithRootViewController:vc];
     [objNav setModalPresentationStyle:UIModalPresentationFullScreen];
     [self.navigationController pushViewController:vc animated:YES];
-   // [self presentViewController:objNav animated:YES completion:nil];
+    // [self presentViewController:objNav animated:YES completion:nil];
     NSLog(@"+ tapped");
 }
 
@@ -66,7 +68,7 @@
 #pragma mark -Core data methods-
 
 -(void) saveData:(City*)city {
-   // NSNumber *count = [NSNumber numberWithInteger:self.locationsArray.count];
+    // NSNumber *count = [NSNumber numberWithInteger:self.locationsArray.count];
     NSManagedObject* entityObj = [NSEntityDescription insertNewObjectForEntityForName:@"CityEntity" inManagedObjectContext:context];
     [entityObj setValue:city.city forKey:@"city"];
     [entityObj setValue:city.country forKey:@"country"];
@@ -78,14 +80,12 @@
 }
 
 -(void) fetch {
-    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-       context = appDelegate.persistentContainer.viewContext;
     NSFetchRequest * fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"CityEntity"];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:true];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     self.fetchedResultsController = [[NSFetchedResultsController alloc]
-                                              initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+                                     initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     NSError *error = nil;
     if (![self.fetchedResultsController performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -108,9 +108,9 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     NSString* identifier = @"cityCell";
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    City* city = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    [self configureCell:cell withObject:(City*) city];
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    NSManagedObject* city = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    [self configureCell:cell withObject:[[City alloc] initWithMO:city]];
     return cell;
 }
 
@@ -128,7 +128,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
-   return YES;
+    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath{
@@ -138,34 +138,37 @@
     [array removeObjectAtIndex:fromIndexPath.row];
     [array insertObject:movingCity atIndex:toIndexPath.row];
     NSLog(@"%d", movingCity.number);
-    
+
     // Update the order of numbers in database
-     int i = 0;
-     for (NSManagedObject *mo in array)
-     {
-         [mo setValue:[NSNumber numberWithInt:i++] forKey:@"number"];
-     }
+    [array enumerateObjectsUsingBlock:^(NSManagedObject*  _Nonnull mo, NSUInteger idx, BOOL * _Nonnull stop) {
+        [mo setValue:@(idx) forKey:@"number"];
+    }];
+
     [appDelegate saveContext];
- }
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSArray* array = [self.fetchedResultsController fetchedObjects];
+
         NSManagedObject* city = [array objectAtIndex:indexPath.row];
         [context deleteObject:city];
-
-        // Update the order of numbers in database
-        int i = 0;
-        for (NSManagedObject *mo in array)
-        {
-            [mo setValue:[NSNumber numberWithInt:i++] forKey:@"number"];
-        }
-
         [appDelegate saveContext];
+        [self fetch];
+
+
+        //array after removing object city
+        NSArray* array2 = [self.fetchedResultsController fetchedObjects];
+        // Update the order of numbers in database
+        [array2 enumerateObjectsUsingBlock:^(NSManagedObject*  _Nonnull mo, NSUInteger idx, BOOL * _Nonnull stop) {
+            [mo setValue:@(idx) forKey:@"number"];
+        }];
+
         [self fetch];
         [self.table reloadData];
     }
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray *array = [NSMutableArray arrayWithArray:[self.fetchedResultsController fetchedObjects]];
     NSManagedObject* tappedCity = [array objectAtIndex:indexPath.row];

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+@class NSManagedObject;
 
 @interface City : NSObject
 
@@ -16,8 +17,8 @@
 @property (strong, nonatomic)NSString* country;
 @property (assign, nonatomic)CLLocationDegrees lat;
 @property (assign, nonatomic)CLLocationDegrees lng;
-@property (assign, nonatomic)CLLocationCoordinate2D location;
 
+- (instancetype)initWithMO:(NSManagedObject*)mo;
 
 
 - (id)initWithCity:(NSString *)aCity
